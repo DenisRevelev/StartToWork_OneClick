@@ -5,20 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StartToWork_OneClick.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="250" Width="300"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
     <Window.Resources>
         <local:MainWindowViewModel x:Key="myVM"/>
     </Window.Resources>
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <Button x:Name="OpenSettings"
-                Content="Открыть настройки" 
-                Height="40"
-                Width="80"
-                Click="OpenSettings_Click"/>
-            <Button Content="Старт приложений" Height="40" Width="80"
-                    Command="{Binding StartAppCommand, Mode=OneWay, Source={StaticResource myVM}}"/>
-            <Button Content="Закрыть" Height="40" Width="80"/>
+        <StackPanel>
+            <Button Content="Работать" Height="35" Width="80"
+                    Command="{Binding StartAppCommand, Mode=OneWay, Source={StaticResource myVM}}">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <Button x:Name="OpenSettings"
+                                Content="Настройки" 
+                                Height="35"
+                                Width="80"
+                                Click="OpenSettings_Click"/>
+                        <Button x:Name="Close" 
+                                Content="Закрыть" 
+                                Height="35" 
+                                Width="80"
+                                Click="Close_Click"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

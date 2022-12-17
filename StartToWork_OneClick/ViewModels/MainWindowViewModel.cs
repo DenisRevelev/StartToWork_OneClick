@@ -44,15 +44,18 @@ namespace StartToWork_OneClick.ViewModels
             GetData();
             foreach (var item in AllData)
             {
-                if (item.PathApplication.Contains(".txt"))
+                if (item.FixStart)
                 {
-                    Process txt = new Process();
-                    txt.StartInfo.FileName = "notepad.exe";
-                    txt.StartInfo.Arguments = item.PathApplication;
-                    txt.Start();
+                    if (item.PathApplication.Contains(".txt"))
+                    {
+                        Process txt = new Process();
+                        txt.StartInfo.FileName = "notepad.exe";
+                        txt.StartInfo.Arguments = item.PathApplication;
+                        txt.Start();
+                    }
+                    else
+                        await Task.Run(() => Process.Start(item.PathApplication!));
                 }
-                else
-                    await Task.Run(() => Process.Start(item.PathApplication!));
             }
         }
 
